@@ -1,34 +1,77 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+  --card-gradient: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 #root {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .checkbox {
   appearance: none;
-  width: 19px;
-  height: 19px;
-  background-color: #484f58;
-  border: 1px solid #000;
-  border-radius: 3px;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
 }
+
+.checkbox:hover {
+  border-color: rgba(102, 126, 234, 0.6);
+  transform: scale(1.1);
+}
+
 .checkbox:checked {
-  background-color: #343a3f;
+  background: var(--success-gradient);
+  border-color: transparent;
 }
+
 .checkbox:checked::before {
   content: "";
-  width: 19px;
-  height: 19px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
   background-image: url(/check.svg);
-  background-size: 90%;
+  background-size: contain;
   background-repeat: no-repeat;
-  padding: 5px;
-  display: block;
+  background-position: center;
 }
+
 .popup-delete::before {
   content: "";
-  border-color: transparent #484f58;
+  border-color: transparent rgba(102, 126, 234, 0.1);
   border-style: solid;
   border-width: 7px 0 7px 10px;
   display: block;
@@ -40,9 +83,33 @@
 }
 
 main {
-  background: linear-gradient(165deg, #ea5f8e 50%, #e25b88 50%);
+  background: var(--primary-gradient);
   padding: 50px 0;
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  animation: fadeIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 p.author {
@@ -50,8 +117,16 @@ p.author {
   justify-content: center;
   margin: 20px 0;
   gap: 7px;
+  color: white;
 }
+
 p.author a {
   text-decoration: none;
   font-weight: 700;
+  color: white;
+  transition: var(--transition);
+}
+
+p.author a:hover {
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
 }
